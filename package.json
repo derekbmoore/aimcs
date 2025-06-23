@@ -1,6 +1,7 @@
 {
   "name": "ai-mcp-system",
   "version": "1.0.0",
+  "private": true,
   "description": "AI system with React frontend, Azure B2C auth, and 100+ MCP server integrations",
   "keywords": ["ai", "mcp", "azure", "react", "llm", "chatbot"],
   "author": "Zimax Team",
@@ -14,9 +15,8 @@
     "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
     "dev:backend": "cd backend && npm run dev",
     "dev:frontend": "cd frontend && npm start",
-    "build": "npm run build:frontend && npm run build:backend",
+    "build": "npm run build:frontend",
     "build:frontend": "cd frontend && npm run build",
-    "build:backend": "cd backend && npm run build",
     "test": "npm run test:frontend && npm run test:backend",
     "test:frontend": "cd frontend && npm test",
     "test:backend": "cd backend && npm test",
