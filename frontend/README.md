@@ -12,74 +12,53 @@ A React 18 + Vite frontend for real-time voice conversation with Azure OpenAI GP
 - ☁️ Deployed on Azure Web App
 - 🔧 Azure CLI integration for easy configuration
 
-## Quick Start (Azure Web App)
+## 🚀 Deployment (Recommended: GitHub Actions)
 
-The application is designed to run on Azure Web App. You can deploy it using:
+### **Primary Method: GitHub Actions (CI/CD)**
 
-### Option 1: Automated Deployment with Azure CLI
+This project is set up for automated deployment using GitHub Actions. Every push to the `main` branch will:
+- Build the app
+- Deploy to Azure Web App
+- Set environment variables from GitHub Secrets
 
-1. **Get Azure OpenAI configuration automatically:**
-   ```bash
-   # Run the configuration script
-   ./get-azure-openai-config.sh
-   
-   # Or just see the commands
-   ./azure-openai-cli.sh
-   ```
-
-2. **Deploy everything with one command:**
-   ```bash
-   ./deploy-azure.sh
-   ```
-
-### Option 2: Manual Azure CLI Commands
-
-1. **Get your Azure OpenAI endpoint:**
-   ```bash
-   az cognitiveservices account show \
-     --name YOUR_OPENAI_RESOURCE \
-     --resource-group YOUR_RESOURCE_GROUP \
-     --query properties.endpoint \
-     --output tsv
-   ```
-
-2. **Get your Azure OpenAI API key:**
-   ```bash
-   az cognitiveservices account keys list \
-     --name YOUR_OPENAI_RESOURCE \
-     --resource-group YOUR_RESOURCE_GROUP \
-     --query key1 \
-     --output tsv
-   ```
-
-3. **List your deployments:**
-   ```bash
-   az cognitiveservices account deployment list \
-     --name YOUR_OPENAI_RESOURCE \
-     --resource-group YOUR_RESOURCE_GROUP
-   ```
-
-4. **Deploy the Web App:**
-   ```bash
-   ./deploy-azure.sh
-   ```
-
-### Option 3: GitHub Actions (Recommended for CI/CD)
-
+**To use:**
 1. Fork this repository
 2. Set up GitHub Secrets in your repository:
-   - `AZURE_WEBAPP_PUBLISH_PROFILE` - Get this from Azure Portal
-   - `AZURE_OPENAI_ENDPOINT` - Your Azure OpenAI endpoint
-   - `AZURE_OPENAI_API_KEY` - Your Azure OpenAI API key
-   - `AZURE_OPENAI_DEPLOYMENT` - Your deployment name (e.g., gpt-4o-mini-realtime-preview)
+   - `AZURE_WEBAPP_PUBLISH_PROFILE` (from Azure Portal)
+   - `AZURE_OPENAI_ENDPOINT` (your Azure OpenAI endpoint)
+   - `AZURE_OPENAI_API_KEY` (your Azure OpenAI API key)
+   - `AZURE_OPENAI_DEPLOYMENT` (your deployment name, e.g., gpt-4o-mini-realtime-preview)
+3. Push to `main` — deployment happens automatically!
 
-3. Push to main/master branch - GitHub Actions will automatically deploy
+**This is the preferred and supported way to deploy to production.**
+
+---
+
+### 🛠️ **Advanced/Manual: Shell Script Deployment**
+
+For advanced users or local/manual testing, you can use the provided shell script:
+
+```bash
+./deploy-azure.sh
+```
+
+This script will:
+- Install dependencies
+- Build the app
+- Fetch Azure OpenAI config
+- Deploy to Azure Web App using Azure CLI
+
+**Note:**
+- You must have the Azure CLI installed and be logged in (`az login`).
+- This is for local/manual use only. For production, use GitHub Actions.
+
+---
 
 ## Local Development
 
 1. Install dependencies:
 ```bash
-npm install
+npm install --legacy-peer-deps
 ```
 
 2. Get Azure OpenAI configuration:
@@ -186,4 +165,5 @@ az webapp config appsettings set \
 
 - Check the browser console for detailed error messages
 - Verify your Azure OpenAI endpoint and API key are correct
-- Ensure your Azure OpenAI deployment supports the Realtime API 
+- Ensure your Azure OpenAI deployment supports the Realtime API
+- Use `./azure-openai-cli.sh` to verify your configuration 
