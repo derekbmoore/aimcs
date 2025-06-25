@@ -1,0 +1,9 @@
+[submodule "aimcs-frontend"]
+	path = aimcs-frontend
+	url = https://github.com/zimaxnet/aimcs-frontend.git
+[submodule "aimcs-backend"]
+	path = aimcs-backend
+	url = https://github.com/zimaxnet/aimcs-backend.git
+[submodule "aimcs-infrastructure"]
+	path = aimcs-infrastructure
+	url = https://github.com/zimaxnet/aimcs-infrastructure.git
