@@ -1,28 +1,24 @@
 {
-  "name": "ai-mcp-system",
+  "name": "aimcs-backend",
   "version": "1.0.0",
-  "private": true,
-  "description": "AI system with React frontend, Azure B2C auth, and 100+ MCP server integrations",
-  "keywords": ["ai", "mcp", "azure", "react", "llm", "chatbot"],
-  "author": "Zimax Team",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/zimaxnet/ai-mcp-system.git"
-  },
-  "workspaces": ["frontend"],
+  "description": "AIMCS Backend API - Node.js Express server for AI Multimodal Customer System",
+  "main": "src/server.js",
   "scripts": {
-    "dev": "npm run dev:frontend",
-    "dev:frontend": "cd frontend && npm run dev",
-    "build": "npm run build:frontend",
-    "build:frontend": "cd frontend && npm run build",
-    "test": "npm run test:frontend",
-    "test:frontend": "cd frontend && npm test",
-    "docker:build": "docker-compose build",
-    "docker:up": "docker-compose up",
-    "docker:down": "docker-compose down"
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["aimcs", "api", "backend", "express", "ai"],
+  "author": "Zimax Networks AI Architecture and Engineering Team",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "helmet": "^7.1.0",
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
-    "concurrently": "^8.2.2"
+    "nodemon": "^3.0.2"
   }
 }
