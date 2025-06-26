@@ -23,6 +23,17 @@ jobs:
         with:
           node-version: '20.x'
 
+      - name: Set up environment variables for Vite build
+        run: |
+          echo "VITE_AZURE_OPENAI_ENDPOINT=${{ secrets.AZURE_OPENAI_ENDPOINT }}" >> $GITHUB_ENV
+          echo "VITE_AZURE_OPENAI_API_KEY=${{ secrets.AZURE_OPENAI_API_KEY }}" >> $GITHUB_ENV
+          echo "VITE_AZURE_OPENAI_DEPLOYMENT=${{ secrets.AZURE_OPENAI_DEPLOYMENT }}" >> $GITHUB_ENV
+
+      - name: Debug Vite env
+        run: |
+          echo "VITE_AZURE_OPENAI_ENDPOINT=$VITE_AZURE_OPENAI_ENDPOINT"
+          echo "VITE_AZURE_OPENAI_DEPLOYMENT=$VITE_AZURE_OPENAI_DEPLOYMENT"
+
       - name: npm install, build, and test
         run: |
           npm install
@@ -60,6 +71,16 @@ jobs:
           client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_CC5E26C736CB423CB35072AD0E8C8F8D }}
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_234C36848C4C4A5E92329125E5125D94 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_A276C49E3B064BEBBA5BEC53E1FA68CA }}
+
+      - name: Configure Azure OpenAI Environment Variables
+        run: |
+          az webapp config appsettings set \
+            --name "aimcs" \
+            --resource-group "aimcs-rg" \
+            --settings \
+            VITE_AZURE_OPENAI_ENDPOINT="${{ secrets.AZURE_OPENAI_ENDPOINT }}" \
+            VITE_AZURE_OPENAI_API_KEY="${{ secrets.AZURE_OPENAI_API_KEY }}" \
+            VITE_AZURE_OPENAI_DEPLOYMENT="${{ secrets.AZURE_OPENAI_DEPLOYMENT }}"
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
